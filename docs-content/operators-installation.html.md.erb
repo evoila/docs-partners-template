@@ -5,9 +5,53 @@ owner: evoila GmbH
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to install and configure YOUR-PRODUCT-NAME.
+This topic describes how to install and configure evoila Cassandra Service Broker.
 
-##<a id='install'></a> Install and Configure YOUR-PRODUCT-NAME
+## <a id="install-service-broker-backend"></a> Install Service Broker Backend
+
+To install the evoila Service Broker file on the Ops Manager Installation Dashboard, do the following:
+
+1. Download the product file from Pivotal Network.
+
+1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product** to upload the product file. 
+
+1. Under the **Import a Product** button, click **+** next to the version number of evoila Service Broker. 
+This adds the tile to your staging area.
+
+1. Click the newly added **evoila Service Broker** tile.
+
+## <a id="configure-service-broker-backend"></a> Configure Service Broker Backend
+
+1. After you have successfully added the evoila Service Broker Backend the next step is the confiugration of it.
+
+1. To configure the Service Broker Backend please click on the evoila Service Broker Backend Tile ![Service Broker Backend Tile](images/tile/service-broker-backend-tile.png)
+
+1. In the first step, please configure the Availability Zones and Network Assignments ![Availability Zones](images/tile/availability-zones-and-network-assignments.png)
+
+1. After doing the changes please click **Save**.
+
+1. In the second step, please configure the Bosh and Credhub Credentials: ![Availability Zones](images/tile/bosh-config.png)
+    1. **For Bosh Opsman Credentials**, please enter a Username and Password, which has the ability to CREATE, UPDATE and DELETE deployments.
+    1. **For Credhub Credentials**, please enter a Username and Password, which has the ability to CREATE, UPDATE and DELETE User/Password, Password and Certificates.
+
+1. After doing the changes please click **Save**.
+
+1. In the third step, you can leave all settings as configured before regarding the execution of errands: ![Errands](images/tile/errands.png)
+
+1. After doing the changes please click **Save**.
+
+1. In the fourth step, please configure the Number of Instances, Persistent Disk Types and VM Type for the backend services: ![Resource Config](images/tile/resource-config.png)
+    1. **RabbitMQ Server**:
+    1. **MongoDB**:
+    1. **HaProxy Agent (deprecated)**:
+
+1. After doing the changes please click **Save**.
+
+1. Return to the Ops Manager Installation Dashboard and click **Apply changes** to install YOUR-PRODUCT-NAME tile.
+
+## <a id='install-service-broker'></a> Install Cassandra Service Broker
+
+## <a id='configure-service-broker'></a> Configure Cassandra Service Broker
 
 To install the YOUR-PRODUCT-NAME file on the Ops Manager Installation Dashboard, do the following:
 

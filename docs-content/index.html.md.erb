@@ -104,6 +104,15 @@ evoila Cassanda Service Broker includes the following key features:
             * two
             * three
        </td>
+    </tr> 
+    <tr>
+       <td>Credential Store</td>
+       <td>
+            All evoila Service Brokers support an abstraction layer for Credential handling:
+
+            * Default: internal credential handler storing encrypted credentials in the Credential column of the Service Broker Backend database.
+            * Crehdub: external Credhub credential handler storing all credentials, certificates etc. in a Credhub instance of your choice (configurable).
+       </td>
     </tr>  
     <tr>
        <td>SSL/TLS</td>
@@ -174,6 +183,7 @@ To install, configure and use evoila Cassandra Service Broker, you must install 
 
 * Pivotal Applications Services
 * Pivotal Container Services
+* evoila Service Broker Backend
 
 ## <a id="feedback"></a>Feedback
 
