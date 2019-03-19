@@ -1,56 +1,133 @@
 ---
-title: YOUR-PRODUCT-NAME (Beta)
-owner: Partners
+title: Cassandra Service Broker (Beta)
+owner: evoila GmbH
 ---
 
 <strong><%= modified_date %></strong>
 
-**If this product is in beta, keep and edit the warning note below.**
 <p class="note warning">
 <strong>Warning: </strong>
-The PRODUCT-NAME for PCF tile is currently in beta and is intended for evaluation and test purposes only. 
+The evoila Cassandra Service Broker for PCF tile is currently in beta and is intended for evaluation and test purposes only. 
 Do not use this product in a PCF production environment.
 </p>
 
-**This topic begins with a brief description of what the product tile (e.g. Apigee Edge Service Broker for PCF) does, 
-whereas the Overview section below describes what the service itself (e.g. Apigee Edge) does. See below for an example.**
+![Service Broker Icon](images/logo.png)
 
-This documentation describes the Apigee Edge Service Broker for Pivotal Cloud Foundry (PCF). The Apigee Edge Service 
-Broker for PCF enables developers to manage APIs for their PCF apps through the Apigee Edge management console.
-
-**Note**: This description will appear under **OVERVIEW** in the tile's listing on 
-[Pivotal Network](http://network.pivotal.io).
+This documentation describes the evoila Cassandra Service Broker for Pivotal Cloud Foundry (PCF) and Pivotal Container Services
+(PKS). The evoila Cassanda Service Broker for PCF/PKS enables developers to run Big Data Applications with a highly scalable
+setup of Cassandra. 
 
 ## <a id='overview'></a>Overview
 
-**The overview describes the service that your product offers to PCF developers. 
-Make sure to overview the features of the integration.
-Don't focus only on the overview of your product that is being integrated.
-See below for an example.**
+evoila Services Brokers support different ways of deployment for Service Instances: 
 
-The Apigee Edge Service Broker for PCF registers a service broker with PCF and exposes its service plans on the 
-Marketplace. Developers can then create service plan instances using Apps Manager or the Cloud Foundry Command 
-Line Interface (cf CLI) and bind them to their apps.
+* Shared Clusters
+* Dedicated VMs and Clusters
 
-Creating an Apigee Edge for PCF service instance and binding it to an app creates an Apigee Edge API proxy that 
-handles requests for the app. This lets developers use the Apigee Edge management console to manage API request 
-handling between clients and the app.
+### Shared Clusters
+Shared Clusters host Service Instances of several users with a multitenancy separation. E.g. a large PostgreSQL Cluster, which allows 
+customers/developers to provision a database instance. Instances on shared clusters are particularly inexpensive, but have limitations 
+in their performance and parameterization possibilities. The services should be hardened so that users can never access external data. 
+Shared Cluster and Service Instances on it should NEVER BE USED FOR PRODUCTION. Most databases do not provide out-of-the-box features 
+for noisy neighbours, connection and resource limitation on a granular level.
 
-**Note**: This overview will appear under **OVERVIEW**, combined with the description above in the tile's listing on 
-[Pivotal Network](http://network.pivotal.io).
+As you can't scale clusters indefinitely or you want to provide different service classes of your existing clusters (Silver, Gold, 
+Platinum based on Storage Performance), the OSB Framework provides the ability to configure an unlimited number of so called existing endpoints.
+
+### Dedicated VMs and Clusters
+Dedicated VMs/Containers and Clusters are Service Instances that are provisioned as needed. Usually the customer is granted more rights on 
+these Service Instances, e.g. to create more databases or users. In addition, more parameters of the service can be set to adapt performance 
+to his use case.
+
+### Cassandra Service Broker
+The evoila Cassandra Service Broker for PCF/PKS is able to supports the following ways of Deployment Cassandra:.
+
+<table class="nice">
+    <th>Deployment Type</th>
+    <th>Enabled</th>
+    <tr>
+        <td>Shared Clusters</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Dedicated Vms and Clusters</td>
+        <td>Yes</td>
+    </tr>
+</table>
+
+The Service Broker supports an unlimited number of Shared and Dedicated Plans. The Plans are predefined with Metadata and Schema
+Definitions, which support the configuration of a Service Instance in the Service Broker Dashboard.
+
+A new Service Instance can be ordered via CF/PKS Command Line Interface. All deployed Service Instances of Cassandra are:
+
+<table class="nice">
+    <th>Deployment </th>
+    <th>Bindable</th>
+    <tr>
+        <td>Shared Clusters</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Dedicated Vms and Clusters</td>
+        <td>Yes</td>
+    </tr>
+</table>
 
 ## <a id='features'></a>Key Features
+evoila Cassanda Service Broker includes the following key features:
 
-**Note**: This feature list will appear under **FEATURES** in the tile's listing on 
-[Pivotal Network](http://network.pivotal.io). 
-Make sure you list the key features of the tile (the integration). 
-We cannot accept a list of the key features of your product that we are integrating.
+<table class="nice">
+    <th>Feature</th>
+    <th>Description</th>
+     <tr>
+        <td>Shared Clusters</td>
+        <td>
+            For the light Plans customer can allow Developers to deploy Service Instances on a Shared MongoDB Replica Set Cluster.
+            This enables Developers to rapidly test their applications against a backend service. Shared Cluster deployments and
+            their Service Instances are NOT recommend for production usage.
+        </td>
+    </tr>
+    <tr>
+        <td>Dedicated Vms and Clusters</td>
+        <td>
+            The dynamic Service Plans allows customers to configured Plans according to their specification. With this the customer is
+            able to spread its Service Offering from Single VM Cassandra Service Instances to (non-limited) multi-node deployments for
+            large scale Service Instances with heavy load.
+        </td>
+    </tr>
+    <tr>
+       <td>Configurability</td>
+       <td>
+            Currently the evoila Cassanda Service Broker supports configuration of the following parameters (post-deployment):
 
-YOUR-PRODUCT-NAME includes the following key features:
-
-* Feature one
-* Feature two
-* Feature three
+            * owner
+            * two
+            * three
+       </td>
+    </tr>  
+    <tr>
+       <td>SSL/TLS</td>
+       <td>
+        Disabled by default, but can be enabled after deployment.
+       </td>
+    </tr>    
+    <tr>
+        <td>Backup Support</td>
+        <td>
+            With the fully integrated Service Broker Backup Solution the customer is able to provide a self-service Backup Solution to
+            the Developers or DevOps. It allows to store Backups on external S3/Swift stores, to compress and encrypt backups and to do
+            restores on demand.
+        </td>
+    </tr>
+    <tr>
+        <td>Supported Stemcells</td>
+        <td>Trusty, Xenial</td>
+    </tr>
+    <tr>
+        <td>Bosh DNS</td>
+        <td>Enabled</td>
+    </tr>
+</table>
 
 
 
@@ -63,60 +140,46 @@ The following table provides version and version-support information about PRODU
     <th>Details</th>
     <tr>
         <td>Tile version</td>
-        <td>vYOUR-VERSION-NUMBER</td>
-    </tr>
-    <tr>
-        <td>Release date</td>
-        <td>YOUR-RELEASE-DATE (Ex: July 1, 2019)</td>
+        <td>1.0.1</td>
     </tr>
     <tr>
         <td>Software component version</td>
-        <td>YOUR-SOFTWARE-COMPONENT-VERSION-NUMBER</td>
+        <td>1.0.1</td>
+    </tr>
+    <tr>
+        <td>Release date</td>
+        <td>February 2019</td>
     </tr>
     <tr>
         <td>Compatible Ops Manager version(s)</td>
-        <td>YOUR-COMPATIBLE-OPS-MAN-VERSION (Ex. 2.2, 2.3, and 2.4)</td>
+        <td>2.2, 2.3 and 2.4</td>
     </tr>
     <tr>
         <td>Compatible Pivotal Application Service version(s)</td>
-        <td>YOUR-COMPATIBLE-PIVOTAL-APPLICATION-SERVICE-VERSION (Ex. 2.2, 2.3, and 2.4)</td>
-    </tr>
+        <td>2.2, 2.3 and 2.4</td>
+    </tr>    
     <tr>
        <td>BOSH stemcell version</td>
-       <td>Ubuntu Xenial</td>
+       <td>Ubuntu Xenial/Ubuntu Trusty (running out of support)</td>
     </tr>
     <tr>
         <td>IaaS support</td>
-        <td>AWS?, Azure?, GCP?, OpenStack?, and vSphere?</td>
-    </tr>
-    <tr>
-        <td>IPsec support?</td>
-        <td>[Yes or No]</td>
+        <td>AWS, Azure, GCP, OpenStack and vSphere</td>
     </tr>
 </table>
 
 
 ## <a id="reqs"></a>Requirements
+To install, configure and use evoila Cassandra Service Broker, you must install the following products:
 
-**Provide any general or specific requirements, prerequisites, or dependencies here. 
-A general requirement might be something like, "An AppDynamics account." 
-A specific requirement might be something like, "Packaging Dependencies for Offline Buildpacks."**
-
-YOUR-PRODUCT-NAME has the following requirements:
-
-+ PREREQUISITE-1
-
-+ PREREQUISITE-2
-
-## <a id="limitations"></a>Limitations
-
-**List any known limitations.**
+* Pivotal Applications Services
+* Pivotal Container Services
 
 ## <a id="feedback"></a>Feedback
 
 If you have a feature request, questions, or information about a bug, please email
-[Pivotal Cloud Foundry Feedback](mailto:cf-feedback@pivotal.io) list or send an email to YOUR-SUPPORT-EMAIL.
+[evoila Service Broker Support](mailto:support@evoila.de) list or send an email to support@evoila.de.
 
 ## <a id='license'></a>License
 
-**List any license information here.**
+Contact our sales team to learn more about commercial licenses and support.
