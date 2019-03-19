@@ -1,5 +1,5 @@
 # Extending Documentation
-As the Bookbinder Gem is fundamentally broken with the current versions of Ruby, we have created a Docker Container. The container maybe run via:
+As the Bookbinder Gem is fundamentally broken with the current versions of Ruby, we have created a Docker Container. The container can be run via:
 
 `docker run --rm -p 4567:4567 -v $PWD/:/app enat/bookbinder`
 

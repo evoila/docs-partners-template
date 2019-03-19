@@ -1,0 +1,82 @@
+---
+title: Configuration of evoila Cassandra Service Broker
+owner: evoila GmbH
+---
+
+<strong><%= modified_date %></strong>
+
+## <a id='install-service-broker'></a> Install Cassandra Service Broker
+
+To install the evoila Cassandra Service Broker file on the Ops Manager Installation Dashboard, do the following:
+
+1. Download the product file from Pivotal Network.
+
+1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product** to upload the product file. 
+
+1. Under the **Import a Product** button, click **+** next to the version number of YOUR-PRODUCT-NAME. 
+This adds the tile to your staging area.
+
+1. Click the newly added **evoila Service Broker** tile.
+
+## <a id='configure-service-broker'></a> Configure Cassandra Service Broker
+
+1. After you have successfully added the evoila Service Broker the next step is the confiugration of it.
+
+1. To configure the Service Broker please click on the evoila Service Broker Tile ![Service Broker Backend Tile](images/logo.png)
+
+1. In the first step, please configure the Availability Zones and Network Assignments ![Availability Zones](images/tile/availability-zones-and-network-assignments.png)
+
+1. In the second step, please configure the plan name and description in the Catalog ![Catalog Name](images/tile/service-broker/catalog-name.png)
+    1. **Name:** Name of the Plan in the Catalog
+    1. **Description:** Description of the Plan in the Catalog
+    1. **Service Bindable?:** Defines, if the Service is bindable with an App
+    1. **Service Updatable?:** Enables, if the Service might be changed from e.g. S to M (currently we don't support this for all Service Brokers, please contact support in case of questions)
+
+1. After doing the changes please click **Save**.
+
+1. After doing the changes please click **Save**.
+
+1. In the third step (only if existing endpoints are configurable), please configure the endpoint of the Deployment. Every deployment comes with a predefined value, which should
+only be changed if there is a valid reason. In case the Deployment of the existing endpoint is done via this Tile, then leave the value as it is.
+![Existing Endpoint](images/tile/service-broker/existing-endpoint.png)
+
+1. After doing the changes please click **Save**.
+
+1. In the fourth step, please configure a Plan. If the Tile contains an **Existing Endpoint** menu item in the tile configuration the first Plan is always dedicated to be
+a Plan for an existing endpoint.
+    1. **Existing Endpoint Plan Configuration** ![Existing Endpoint](images/tile/service-broker/plan-definition-shared.png)
+        1. **Name:** Name of the Plan in the Catalog
+        1. **Description:** Description of the Plan in the Catalog
+        1. **Plan for Free?:** Enables if the Plan is for free
+        1. **Backups Enabled:** Enables if the Plans Service Instance can be backuped by the evoila Backup Manager
+        1. **Connections:** Defines the maximum number of Connections for an Service Instance
+    1. **Dedicated VM/Cluster Plan Configuration** ![Dedicated VM/Cluster](images/tile/service-broker/plan-definition.png)
+        1. **Name:** Name of the Plan in the Catalog
+        1. **Description:** Description of the Plan in the Catalog
+        1. **Plan for Free?:** Enables if the Plan is for free
+        1. **Backups Enabled:** Enables if the Plans Service Instance can be backuped by the evoila Backup Manager
+        1. **Connections:** Defines the maximum number of Connections for an Service Instance
+        1. **Ingress Node:** Defines the node, which accepts the incoming connections. For Service Broker (e.g. MySQL), which are load balanced by HaProxy the plans differ in that sence,
+        that smaller Plans, which only contain one MySQL Node do have MySQL as the node for the incoming connections, while large Plans with a MySQL Galera Cluster do have a HaProxy as 
+        the load balancing node for incoming connections.
+        1. **Nodes:** The number of nodes for the Service Instance (please keep in mind of Qurom Rules etc. NOTE: as misconfiguration might lead to a potential data loss)
+        1. **VM Type:** VM Type used for a Service Instance VM
+        1. **Disk Type:**  Persistence Disk attached to a Service Instance
+        1. **HaProxy VM Type:** VM Type used for a Service Instance VM
+        1. **HaProxy Nodes:** In an load balanced setup this value should always be 1.
+        1. **Availability Zones:** The availability zones used for the deployments
+
+1. After doing the changes please click **Save**.
+
+1. In the pre-last step, you can leave all settings as configured before regarding the execution of errands: ![Errands](images/tile/errands.png)
+
+1. After doing the changes please click **Save**.
+
+1. In the last step, please configure the Number of Instances, Persistent Disk Types and VM Type for the existing service. This differs from Service Broker to Service Broker.
+![Resource Config](images/tile/resource-config.png) As an example we have PostgreSQL here:
+    1. **PostgreSQL**: The central shared Service Instance node. Here you can define the size of Persistent Disk and VM Types for the Cluster.
+    1. **PgPool**: PgPool can be seen as a Load Balancer in front of the cluster. Here you can define the size of Persistent Disk and VM Types for the Cluster.
+
+1. After doing the changes please click **Save**.
+
+1. Return to the Ops Manager Installation Dashboard and click **Apply changes** to install the evoila Service Broker Backend tile.

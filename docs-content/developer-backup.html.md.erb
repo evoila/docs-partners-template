@@ -4,3 +4,43 @@ owner: evoila GmbH
 ---
 
 <strong><%= modified_date %></strong>
+
+## <a id="architecture"></a> Architecture
+The following sections describe the core facts of the Framework, including implemented Datatransfer endpoints, features of backup plans and the scripts, which need to be implemented by the DBAs.
+
+## <a id="supported-endpoints"></a> Supported Endpoints
+S3
+Swift
+
+## <a id="backup-plans"></a> Backup Plan
+Pausing/Unpausing plans
+Compression
+Encryption
+Frequeny (based on CRON expressions)
+Retention Period
+Retention Type (based on DAYS, HOURS, FILES)
+
+## <a id="scripts"></a> Scripts
+The scripts being called by the OSB Backup Manger in a backup/restore run are as follows.
+
+## <a id="backup"></a> Backup
+The agent runs following shell scripts from top to bottom
+
+* pre-backup-lock
+* pre-backup-check
+* backup
+* backup-cleanup
+* post-backup-unlock
+
+In the backup stage, after the script generated the file to upload (name consists of YYYY_MM_DD.tar.gz), the agent uploads the backup file from the set directory to the cloud storage using the given information and credentials.
+
+## <a id="restore"></a> Restore
+The agent runs following shell scripts from top to bottom
+
+* pre-restore-lock
+* restore
+* restore-cleanup
+* post-restore-unlock
+
+In the restore stage, before the dedicated script starts the actual restore, the agent downloads the backed up restore file from the cloud storage, using the given information and credentials, and puts it in the dedicated directory.
+
