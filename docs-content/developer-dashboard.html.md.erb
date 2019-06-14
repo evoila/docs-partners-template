@@ -8,8 +8,70 @@ owner: evoila GmbH
 This topic describes how to use the Service Dashboard
 
 ## <a id="access-dashboard"></a> Access Dashboard
+To access the Dashboard two different options do exist:
+
+* Apps Manager
+* CLI
+
+
+### CLI
+Accessing the Dasboard via CLI is relatively easy. Before you can access the URL to open the Service Dashboard, you need to login via CF CLI. After you have selected the Organisation 
+and Space issue `cf services`
+
+This should produce an output as following:
+
+```bash
+cf services
+Getting services in org demo / space demo-test as admin...
+
+name               service               plan   bound apps   last operation
+osb-mysql-test-s   osb-mysql-test        s                   create succeeded
+postgres-test      osb-postgresql-test   s                   create succeeded
+````
+
+After you have selected the Service you want to access via Dashboard, you need to issue `cf service SERVICE_NAME`.
+
+This should produce an output as following:
+
+```bash
+service postgres-test
+Showing info of service postgres-test in org demo / space demo-test as admin...
+
+name:            postgres-test
+service:         osb-postgresql-test
+bound apps:
+tags:
+plan:            s
+description:     PostgreSQL Instances
+documentation:
+dashboard:       https://osb-postgresql-test.cf.domain.com/custom/v2/authentication/312648fd-d987-470a-b7c0-2d7dadf8b0ee
+
+Showing status of last operation from service postgres-test...
+
+status:    create succeeded
+message:   Instance successfully created
+started:   2019-03-20T09:45:19Z
+updated:   2019-03-20T09:49:24Z
+```
+
+To finally access the Dashboard, please follow the link under `dashboard`. In this case: `https://osb-postgresql-test.cf.domain.com/custom/v2/authentication/312648fd-d987-470a-b7c0-2d7dadf8b0ee`
+
+After you entered the link in your browser, press `Enter` and follow the documentation at **Dashboard Login**.
+### Apps Manager
+![Service Overview](images/dashboard/service-overview.png)
+
+![Service Details](images/dashboard/service-details.png)
+
+
+### Dashboard Login
+To access the Dashboard, please enter your Login Credentials. 
+![Dashboard Login](images/dashboard/dashboard-login.png)
+
+**HINT:** It should be the same Credentials that are used on the CF CLI or in Apps Manager.
 
 ## <a id="dashboard-sections"></a> Dashboard Sections
+The Dashboard consists of multiple sections, which will be discussed in the following paragraphs.
+
 
 ## <a id="support-and-docs"></a> Support and Docs
 
