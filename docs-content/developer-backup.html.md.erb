@@ -1,46 +1,39 @@
 ---
-title: Installing and Configuring evoila Cassandra Service Broker
+title: Backup Management
 owner: evoila GmbH
 ---
 
 <strong><%= modified_date %></strong>
 
-## <a id="architecture"></a> Architecture
-The following sections describe the core facts of the Framework, including implemented Datatransfer endpoints, features of backup plans and the scripts, which need to be implemented by the DBAs.
+### Backup Endpoint Configuration
 
-## <a id="supported-endpoints"></a> Supported Endpoints
+![Backup Endpoints](images/backup/backup-endpoint.png)
+
+Available endpoints:
 * S3
 * Swift
 
-## <a id="backup-plans"></a> Backup Plan
-Pausing/Unpausing plans
-Compression
-Encryption
-Frequeny (based on CRON expressions)
-Retention Period
-Retention Type (based on DAYS, HOURS, FILES)
+![Backup Endpoints](images/backup/backup-endpoint-list.png)
 
-## <a id="scripts"></a> Scripts
-The scripts being called by the OSB Backup Manger in a backup/restore run are as follows.
+### Backup Plan Configuration
 
-## <a id="backup"></a> Backup
-The agent runs following shell scripts from top to bottom
+![Backup Plans](images/backup/backup-plans.png)
 
-* pre-backup-lock
-* pre-backup-check
-* backup
-* backup-cleanup
-* post-backup-unlock
+* "0 0 * * * *" = the top of every hour of every day.
+* "*/10 * * * * *" = every ten seconds.
+* "0 0 8-10 * * *" = 8, 9 and 10 o'clock of every day.
+* "0 0 8,10 * * *" = 8 and 10 o'clock of every day.
+* "0 0/30 8-10 * * *" = 8:00, 8:30, 9:00, 9:30 and 10 o'clock every day.
+* "0 0 9-17 * * MON-FRI" = on the hour nine-to-five weekdays
+* "0 0 0 25 12 ?" = every Christmas Day at midnight
+Cron expression is represented by six fields:
 
-In the backup stage, after the script generated the file to upload (name consists of YYYY_MM_DD.tar.gz), the agent uploads the backup file from the set directory to the cloud storage using the given information and credentials.
+second, minute, hour, day of month, month, day(s) of week
 
-## <a id="restore"></a> Restore
-The agent runs following shell scripts from top to bottom
+### Backup Jobs
 
-* pre-restore-lock
-* restore
-* restore-cleanup
-* post-restore-unlock
+![Backup Plans](images/backup/backup-jobs-list.png)
 
-In the restore stage, before the dedicated script starts the actual restore, the agent downloads the backed up restore file from the cloud storage, using the given information and credentials, and puts it in the dedicated directory.
+![Backup Plans](images/backup/backup-job-details.png)
 
+File name format: 2019_08_22_18_10_10.0.64.96_8ee03884-1de5-4433-885c-ae9095589b5b.tar.gz

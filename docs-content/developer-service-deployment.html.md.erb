@@ -1,6 +1,273 @@
 ---
-title: Installing and Configuring evoila Cassandra Service Broker
+title: Using YOUR-PRODUCT-NAME with PCF
 owner: evoila GmbH
 ---
 
 <strong><%= modified_date %></strong>
+
+# Deploy a Service
+Before you can start using a Service with an App it is necessary that you deploy it. As with all other interactions with CF the deployment is done via CF CLI. 
+
+## Service Marketplace
+Before you can start you have to fullfil some prerequisits:
+* Installed the tile in PCF
+* Configured the Plans according to your specification
+* Access to your PCF instance
+
+When you fulfilled all the prerequisits, you can check the availbable services by issuing `cf marketplace`:
+
+```
+$ cf marketplace
+Getting services from marketplace in org evoila / space test as admin...
+OK
+service             plans           description
+osb-SERVICE_NAME    s, m, l, xl     OSB Services for SERVICE NAME
+```
+
+## Creating a Service Instances
+You can create a service instance with the following command: `cf create-service osb-SERVICE_NAME PLAN SERVICE_INSTANCE`
+
+* osb-SERVICE_NAME: representing the service name of the service you want to deploy. E.g. osb-redis, osb-mysql.
+* PLAN: the plan, which is the selection from s, m, l etc.
+* SERVICE_INSTANCE: the name of the service instance.
+
+```
+$ cf create-service osb-SERVICE_NAME PLAN_NAME my_service
+
+Creating service my_service in org evoila / space test as operator@domain.com...
+OK
+```
+
+INFO: Sometime it can happen, that different brokers provide services with the same name. In that case, you need to specify the broker in you provisioning command with `-b BROKER_NAME`. 
+
+### Arbitrary Parameters
+INFO: Arbitrary parameters require cf CLI v6.12.1+
+
+Nearly all of our service broker provide additional configuration parameters with the provision request. The format to pass these parameters into the Service are based on a JSON object. Currently there are two options provide the parameters during the service creation:
+* In line 
+* Referencing a file
+
+For a list of supported configuration parameters, see the documentation for the particular service offering.
+
+**Service-specific configuration parameters in-line:**
+
+```
+$ cf create-service osb-SERVICE_NAME PLAN_NAME my_service -c '{"storage_gb":4}'
+
+Creating service my_service in org evoila / space test as operator@domain.com...
+OK
+```
+
+**Service-specific configuration parameters in a file:**
+
+```
+$ cf create-service osb-SERVICE_NAME PLAN_NAME my_service -c /tmp/config.json
+
+Creating service my_service in org evoila / space test as operator@domain.com...
+OK
+```
+
+## Instance Tags
+Instance tags require cf CLI v6.12.1+
+
+Some of our service provide the availability to specify tag, which Cloud Foundry includes in the VCAP_SERVICES environment variables. The benifit of those tags is mostly for developers, who can access them by parsing the credentials in a different way. Developers may provide their own tags when creating a service instance by including the -t flag followed by a comma-separated list of tags.
+
+**Example providing a comma-separated list of tags:**
+
+```
+$ cf create-service osb-SERVICE_NAME PLAN_NAME my_service -t "prod, workers"
+
+Creating service my_service in org evoila / space test as operator@domain.com...
+OK
+``` 
+
+## List Service Instances
+Run the cf services command to list the service instances in your targeted space. The output from running this command includes any bound apps and the state of the last requested operation for the service instance.
+
+```
+$ cf services
+Getting services in org evoila / space test as operator@domain.com...
+OK
+
+name       service       plan        bound apps   last operation      broker                upgrade available
+redis      osb-redis     s           myapp        create succeeded    osb-redis             no
+mysql-xl   osb-mysql     xl                       create succeeded    osb-mysql             yes
+```
+
+Get Details for a Particular Service Instance
+Details include dashboard urls, if applicable, and operation start and last updated timestamps.
+
+```
+$ cf service mysql
+
+service instance:       mysql-xl
+service:                osb-mysql
+plan:                   s
+description:            mysql databases on demand
+documentation url:
+dashboard:              https://osb-mysql.example.com/custom/v2/authentication/8ee03884-1de5-4433-885c-ae9095589b5b
+service broker:         osb-mysql
+
+This service is not currently shared.
+
+Showing status of last operation from service mydb...
+
+status:    create succeeded
+message:
+started:   2019-02-13T12:02:19Z
+updated:   2019-02-13T12:02:19Z
+
+There are no bound apps for this service.
+```
+
+## Bind a Service Instance
+Depending on the service, you can bind service instances to apps and/or routes.
+
+Not all services support binding, as some services deliver value to users directly without integration with Cloud Foundry, such as SaaS apps.
+
+### Bind a Service Instance to an App
+Depending on the service, binding a service instance to your app may deliver credentials for the service instance to the app. See the Delivering Service Credentials to an App topic for more information. Binding a service instance to an app may also trigger app logs to be streamed to the service instance. For more information, see Streaming App Logs to Log Management Services.
+
+```
+$ cf bind-service demo-app mysql-xl
+Binding service mysql-xl to demo-app in org evoila / space test as operator@example.com...
+OK
+TIP: Use 'cf push' to ensure your env variable changes take effect
+```
+
+```
+$ cf restart demo-app
+Note: You must restart or in some cases re-push your app for changes to be applied to the VCAP_SERVICES environment variable and for the app to recognize these changes.
+```
+
+### Binding with App Manifest
+A different way of binding a service instance to an app is based on the usage of manifest. Please be aware as of cf CLI v6.12.1, Arbitrary Parameters are not supported in app manifests. Using the manifest to bind service instances to routes is also not supported.
+
+The following excerpt from an app manifest binds a service instance called mysql-xl to the app on push.
+
+```
+services:
+ - mysql-xs
+```
+
+To issue the deployment and binding of the app via manifest you just use the well known `cf push`. 
+
+```
+$ cf push
+Using manifest file /evoila/manifest.yml
+
+...
+
+Binding service mysql-xl to demo-app in org evoila / space test as operator@example.com
+OK
+```
+
+For more information about app manifests, see Deploying with App Manifests.
+
+### Arbitrary Parameters
+INFO: Arbitrary parameters require cf CLI v6.12.1+
+
+Nearly all of our service broker provide additional configuration parameters with the provision request. The format to pass these parameters into the Service are based on a JSON object. Currently there are two options provide the parameters during the service creation:
+* In line 
+* Referencing a file
+
+For a list of supported configuration parameters, see the documentation for the particular service offering.
+
+```
+$ cf bind-service demo-app mysql-xl -c '{"role":"read-only"}'
+
+Binding service mysql-xl to app demo-app in org evoila / space test as operator@example.com...
+OK
+$ cf bind-service demo-app mysql-xl -c /tmp/config.json
+
+Binding service mysql-xl to app demo-app in org evoila / space test as operator@example.com... OK
+```
+
+### Unbind a Service Instance
+To remove the credential section from VCAP_SERVICES and also order the deletion of the access to the service instance through the broker, issue `cf unbind-service`. 
+
+```
+$ cf unbind-service demo-app mysql-xl
+Unbinding app demo-app from service mysql in org evoila / space test as operator@example.com...
+OK
+````
+
+INFO: To take effect of the unbdind operation it is necessary to restage the application. 
+
+### Rename a Service Instance
+You can change the name given to a service instance. Keep in mind that upon restarting any bound apps, the name of the instance will change in the VCAP_SERVICES environment variable. If your app depends on the instance name for discovering credentials, changing the name could break your app’s use of the service instance.
+
+```
+$ cf rename-service mysql-xl mysql-l
+Renaming service mysql-xl to mysql-l in org evoila / space test as operator@example.com...
+OK
+```
+
+## Update a Service Instance
+### Changing a Service Plan
+Changing a plan requires cf CLI v6.7+ and cf-release v192+
+
+By updating the service plan for an instance, users can change their service instance to other service plans. Though the platform and CLI now support this feature, services must expressly implement support for it so not all services will. Further, a service might support updating between some plans but not others. For instance, a service might support updating a plan where only a logical change is required, but not where data migration is necessary. In either case, users can expect to see a meaningful error when plan update is not supported.
+
+```
+$ cf update-service mysql-xl -p new-plan
+Updating service instance mysql-xl as operator@example.com...
+OK
+```
+
+### Arbitrary Parameters
+INFO: Arbitrary parameters require cf CLI v6.12.1+
+
+Nearly all of our service broker provide additional configuration parameters with the provision request. The format to pass these parameters into the Service are based on a JSON object. Currently there are two options provide the parameters during the service creation:
+* In line 
+* Referencing a file
+
+For a list of supported configuration parameters, see the documentation for the particular service offering.
+
+```
+$ cf update-service mysql-l -c '{"storage_gb":4}'
+
+Updating service instance mydb as me@example.com...
+$ cf update-service mysql-l -c /tmp/config.json
+
+Updating service instance mysql-l as operator@example.com...
+```
+
+## Upgrade a Service Instance
+Upgrading a Service Instance requires cf CLI v6.46.0+ and CAPI release 1.83.0+
+
+Some service brokers support upgrading service instances to the latest version of a service plan. For example, a broker may want to provide a way for users of the service to upgrade the underlying operating system that their service instances run on.
+
+To upgrade your service instances, do the following:
+
+Confirm that an upgrade is available by running cf services and reviewing the upgrade available column:
+
+```
+$ cf services
+Getting services in org evoila / space test as operator@example.com...
+
+name       service       plan        bound apps   last operation      broker                upgrade available
+redis      osb-redis     s           myapp        create succeeded    osb-redis             no
+mysql-xl   osb-mysql     xl                       create succeeded    osb-mysql             yes
+```
+
+Upgrade the service instance using the --upgrade flag:
+
+```
+$ cf update-service mysql-l --upgrade
+You are about to update mydb.
+Warning: This operation may be long running and will block further operations on the service until complete.
+Really update service mydb? [yN]: y
+OK
+````
+
+## Delete a Service Instance
+Deleting a service instance deprovisions the service instance and deletes all data associated with the service instance.
+
+```
+$ cf delete-service mysql-l
+
+Are you sure you want to delete the service mysql-l ? y
+Deleting service mysql-l in org evoila / space test as operator@example.com...
+OK
+```

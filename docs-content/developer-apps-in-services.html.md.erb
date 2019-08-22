@@ -1,6 +1,64 @@
 ---
-title: Installing and Configuring evoila Cassandra Service Broker
+title: Using YOUR-PRODUCT-NAME with PCF
 owner: evoila GmbH
 ---
 
 <strong><%= modified_date %></strong>
+
+# Using a Service in an App
+For the services which provide credentials to a service backend, you need to rely on the contents of VCAP_SERVICES. A VCAP_SERVICES section might look as follows:
+
+```
+{
+ "VCAP_SERVICES": {
+  "osb-postgresql": [
+   {
+    "binding_name": null,
+    "credentials": {
+     "database": "f3092088",
+     "password": "JzW58hcKCO7S9ul",
+     "uri": "postgres://2iYQ9piY4b:JzW58hcKCO7S9ul@10.0.64.29:5432/f3092088",
+     "user": "2iYQ9piY4b"
+    },
+    "instance_name": "prod-psql",
+    "label": "osb-postgresql",
+    "name": "prod-psql",
+    "plan": "s",
+    "provider": null,
+    "syslog_drain_url": null,
+    "tags": [],
+    "volume_mounts": []
+   }
+  ],
+  "osb-rabbitmq": [
+   {
+    "binding_name": null,
+    "credentials": {
+     "hostname": "10.0.64.24",
+     "name": "192e97e9",
+     "password": "D2yw9Nbru9IV6ws",
+     "port": 5672,
+     "uri": "amqp://Z2nSRnfxNj:D2yw9Nbru9IV6ws@10.0.64.24:5672/192e97e9",
+     "user": "Z2nSRnfxNj",
+     "vhost": "192e97e9"
+    },
+    "instance_name": "prod-rabbitmq",
+    "label": "osb-rabbitmq",
+    "name": "prod-rabbitmq",
+    "plan": "xs",
+    "provider": null,
+    "syslog_drain_url": null,
+    "tags": [],
+    "volume_mounts": []
+   }
+  ],
+  ...
+ }
+}
+```
+
+As you can see from above the basic structure is the same for all service instances, while the contents for a specific service may differ. The most important part of each entry in VCAP_SERVICES is the credential section, which 
+contains all relevant information like `name`, `username`, `password`, `host` etc. 
+
+## Recommendation
+When you try to retrieve you service in the VCAP_SERVICES section implement the retrieval based on the key of the corresponding service, e.g. `osb-rabbitmq` and the filter by `instance_name` and or `tags`. 
