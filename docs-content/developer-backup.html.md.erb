@@ -5,33 +5,73 @@ owner: evoila GmbH
 
 <strong><%= modified_date %></strong>
 
+In contrast to many backup solutions on for Open Service Brokers our solution is completely based on an self-service approach. Operators and developers are enabled 
+to configure and maintain the backup endpoints, plans and restore operations from a dashboard. The following sections will guide you through the process of 
+setting up backup management for Open Service Brokers with data services (e.g. PostgreSQL, MySQL etc.).
 ### Backup Endpoint Configuration
+Before you can create backup plans it is necessary to configure a backup endpoint. Currently we support two diffent endpoint technologies:
+
+* S3
+* Swift
+
+#### S3
+For S3 you need to configure the following parameters in AWS before you can add it to your backup endpoint:
+
+* AWS Secret: create AWS secret from your AWS management console
+* AWS Secret Key: use the AWS secret key from the AWS secret 
+* Bucket: create a bucket in AWS S3 and remember the name
+
+#### Swift
+TODO
 
 ![Backup Endpoints](images/backup/backup-endpoint.png)
 
-Available endpoints:
-* S3
-* Swift
+Additionally you need to specify the following values for an endpoint:
+
+* Name: the endpoint name 
+* Destination Type: choose between S3 and Swift
+* Bucket/Container: depending on S3 or Swift
+
+After you have entered your data, you need to click the `Validate` button. This button issues a request against the backend, which checks if the provided credentials
+are correct. If the validation was not successful, you will see and error at the botton of your browser window. When the validation was successful you will see
+a button labeled with `Submit`, which you can click to save the endpoint.
+
+After you have successfully configured an endpoint, you will be redirected to the endpoint overview. There you can click on details if you want to edit the endpoint.
+
 
 ![Backup Endpoints](images/backup/backup-endpoint-list.png)
 
 ### Backup Plan Configuration
+After you have successfully configured the backup endpoint the next step is to configure the backup plan. A backup plan defines the backup schedule for one or more
+databases. 
 
 ![Backup Plans](images/backup/backup-plans.png)
 
-* "0 0 * * * *" = the top of every hour of every day.
-* "*/10 * * * * *" = every ten seconds.
-* "0 0 8-10 * * *" = 8, 9 and 10 o'clock of every day.
-* "0 0 8,10 * * *" = 8 and 10 o'clock of every day.
-* "0 0/30 8-10 * * *" = 8:00, 8:30, 9:00, 9:30 and 10 o'clock every day.
-* "0 0 9-17 * * MON-FRI" = on the hour nine-to-five weekdays
-* "0 0 0 25 12 ?" = every Christmas Day at midnight
-Cron expression is represented by six fields:
+To configure a backup plan you need to configure the following fields:
 
-second, minute, hour, day of month, month, day(s) of week
+* Name: the plan name
+* Paused: if the plan is paused or not
+* Compression: if the files should be compressed or not before they are uploaded to the endpoint (recommended)
+* Frequencey:
+    * "0 0 * * * *" = the top of every hour of every day.
+    * "*/10 * * * * *" = every ten seconds.
+    * "0 0 8-10 * * *" = 8, 9 and 10 o'clock of every day.
+    * "0 0 8,10 * * *" = 8 and 10 o'clock of every day.
+    * "0 0/30 8-10 * * *" = 8:00, 8:30, 9:00, 9:30 and 10 o'clock every day.
+    * "0 0 9-17 * * MON-FRI" = on the hour nine-to-five weekdays
+    * "0 0 0 25 12 ?" = every Christmas Day at midnight
+    * **Cron expression is represented by six fields: second, minute, hour, day of month, month, day(s) of week**
+* Retention Period: The length of the rention style, files should be kept on the file store
+* Retention Style:: Selection between days, weeks and files
+* File Destination: The file endpoint you have configured in the previous step
+
+After you have successfully configured an plan, you will be redirected to the plan overview. There you can click on details if you want to edit the plan.
+
+![Backup Plans](images/backup/backup-plan-list.png)
 
 ### Backup Jobs
-
+From the backup plan section and the `Backup now` button or based on the periodic scheduling you defined backup jobs are run. The state of those runs can be 
+checked in the backup jobs section. The most important information here are the start date of the job and the state. 
 ![Backup Plans](images/backup/backup-jobs-list.png)
 
 ![Backup Plans](images/backup/backup-job-details.png)
