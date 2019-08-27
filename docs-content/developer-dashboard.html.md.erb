@@ -57,8 +57,14 @@ updated:   2019-03-20T09:49:24Z
 To finally access the Dashboard, please follow the link under `dashboard`. In this case: `https://osb-postgresql-test.cf.domain.com/custom/v2/authentication/312648fd-d987-470a-b7c0-2d7dadf8b0ee`
 
 After you entered the link in your browser, press `Enter` and follow the documentation at **Dashboard Login**.
+
 ### Apps Manager
+To access the Service Broker Dashboards of the PCF App Manager click on the Services section in your organization and space. Select the
+service you want to configure, which should lead you to the service details page.
+
 ![Service Overview](images/dashboard/service-overview.png)
+
+After opening the service details page, you should see a `Manage` link in the upper right corner, which you can click to get to the **Dashboard Login**.
 
 ![Service Details](images/dashboard/service-details.png)
 
@@ -72,18 +78,29 @@ To access the Dashboard, please enter your Login Credentials.
 ## <a id="dashboard-sections"></a> Dashboard Sections
 The Dashboard consists of multiple sections, which will be discussed in the following paragraphs.
 
-## <a id="support-and-docs"></a> Welcome Dashboard
+### <a id="support-and-docs"></a> Welcome Dashboard
+The Dashboard Overview is the general starting point, when using the Service Broker options. Based on the options a Service Broker offers
+you can find there a general description, the links to the documentation, backup management and service keys.
+
 ![Backup Plans](images/dashboard/dashboard-overview.png)
 
-## <a id="support-and-docs"></a> Configuration
-![Service Configuration](images/dashboard/configuration.png)
+### <a id="support-and-docs"></a> Configuration
+The configuration section allows you, if the feature is enabled for the Service Broker, to configure databases on a pre-selected amount of 
+configuration elements. If you don't find a configuration option you would expect, please contact us.
 
-![Service Configuration Operation Indicator](images/dashboard/configuration-indicator.png)
+![Service Configuration](images/dashboard/dashboard-configuration.png)
 
-## <a id="support-and-docs"></a> Backup
+When you do a configuration change, in the upper right corner you can see a spinning circle. By clicking on it, you can also see the current
+action being executed.
 
-![Backup Dashboard](images/backup/backup-dashboard.png)
+### <a id="support-and-docs"></a> Backup Management
+The backup management section allows you, if the feature is enabled for the Service Broker, to configure and schedule the backup management
+for your endpoint service.
 
-## <a id="service-keys"></a> Service Keys
+![Backup Dashboard](images/dashboard/dashboard-backup.png)
 
-![Service Keys](images/dashboard/service-keys.png)
+### <a id="service-keys"></a> Service Keys
+The service key section allows you, if the feature is enabled for the Service Broker, to configure credentials, which are not bound to a
+specific app. 
+
+![Service Keys](images/dashboard/dashboard-service-keys.png)

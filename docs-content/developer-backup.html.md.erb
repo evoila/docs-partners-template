@@ -21,10 +21,7 @@ For S3 you need to configure the following parameters in AWS before you can add 
 * AWS Secret Key: use the AWS secret key from the AWS secret 
 * Bucket: create a bucket in AWS S3 and remember the name
 
-#### Swift
-TODO
-
-![Backup Endpoints](images/backup/backup-endpoint-configuration.png)
+![Backup Endpoint Configuration](images/backup/backup-endpoint-configuration.png)
 
 Additionally you need to specify the following values for an endpoint:
 
@@ -38,14 +35,13 @@ a button labeled with `Submit`, which you can click to save the endpoint.
 
 After you have successfully configured an endpoint, you will be redirected to the endpoint overview. There you can click on details if you want to edit the endpoint.
 
-
-![Backup Endpoints](images/backup/backup-endpoint-list.png)
+![Backup Endpoint List](images/backup/backup-endpoint-list.png)
 
 ### Backup Plan Configuration
 After you have successfully configured the backup endpoint the next step is to configure the backup plan. A backup plan defines the backup schedule for one or more
 databases. 
 
-![Backup Plans](images/backup/backup-plan-configuration.png)
+![Backup Plan Configuration](images/backup/backup-plan-configuration.png)
 
 To configure a backup plan you need to configure the following fields:
 
@@ -67,12 +63,13 @@ To configure a backup plan you need to configure the following fields:
 
 After you have successfully configured an plan, you will be redirected to the plan overview. There you can click on details if you want to edit the plan.
 
-![Backup Plans](images/backup/backup-plan-list.png)
+![Backup Plan List](images/backup/backup-plan-list.png)
 
 ### Backup Jobs
 From the backup plan section and the `Backup now` button or based on the periodic scheduling you defined backup jobs are run. The state of those runs can be 
 checked in the backup jobs section. The most important information here are the start date of the job and the state. 
-![Backup Plans](images/backup/backup-job-list.png)
+
+![Backup Job List](images/backup/backup-job-list.png)
 
 A backup job may have four different states:
 
@@ -84,7 +81,7 @@ A backup job may have four different states:
 By clicking on the details button you can see the job details. The job details view contains valuable information about the success of your backup job. Currently
 the following properties are returned:
 
-![Backup Plans](images/backup/backup-job-details.png)
+![Backup Job Details](images/backup/backup-job-details.png)
 
 The information you can find in the job details section are as follows:
 
@@ -116,7 +113,7 @@ The information you can find in the job details section are as follows:
 ### Restore Points
 If a backup was successful, you can find the restore points in the overview under Restore Points. To restore from a specific restore point just click on the restore 
 button, which will bring you to the backup selection.
-![Backup Plans](images/backup/restore-point-list.png)
+![Restore Endpoint List](images/backup/restore-point-list.png)
 
 In this section you can find the the following properties:
 
@@ -125,7 +122,7 @@ In this section you can find the the following properties:
 * Container/Bucket: configured container or bucket
 * Files: the files transferred to the endpoint, one per database configured (file name format: 2019_08_22_18_10_10.0.64.96_8ee03884-1de5-4433-885c-ae9095589b5b.tar.gz)
 
-![Backup Plans](images/backup/restore-point-request.png)
+![Restore Endpoint Request](images/backup/restore-point-request.png)
 
 By clicking on the `restore` button you can trigger a restore operation, which will then trigger a restore in the database the backup was
 made of.
