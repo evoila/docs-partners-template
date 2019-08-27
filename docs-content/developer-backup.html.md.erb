@@ -24,7 +24,7 @@ For S3 you need to configure the following parameters in AWS before you can add 
 #### Swift
 TODO
 
-![Backup Endpoints](images/backup/backup-endpoint.png)
+![Backup Endpoints](images/backup/backup-endpoint-configuration.png)
 
 Additionally you need to specify the following values for an endpoint:
 
@@ -45,7 +45,7 @@ After you have successfully configured an endpoint, you will be redirected to th
 After you have successfully configured the backup endpoint the next step is to configure the backup plan. A backup plan defines the backup schedule for one or more
 databases. 
 
-![Backup Plans](images/backup/backup-plans.png)
+![Backup Plans](images/backup/backup-plan-configuration.png)
 
 To configure a backup plan you need to configure the following fields:
 
@@ -72,8 +72,100 @@ After you have successfully configured an plan, you will be redirected to the pl
 ### Backup Jobs
 From the backup plan section and the `Backup now` button or based on the periodic scheduling you defined backup jobs are run. The state of those runs can be 
 checked in the backup jobs section. The most important information here are the start date of the job and the state. 
-![Backup Plans](images/backup/backup-jobs-list.png)
+![Backup Plans](images/backup/backup-job-list.png)
+
+A backup job may have four different states:
+
+* STARTED: job was started a few seconds ago and is not yet executed through the backup agent
+* RUNNING: job is being executed in the agent or uploading resource to your endpoint
+* SUCCEEDED: job execution was successful
+* ERROR: job execution failed, please check in the job detail view the reason
+
+By clicking on the details button you can see the job details. The job details view contains valuable information about the success of your backup job. Currently
+the following properties are returned:
 
 ![Backup Plans](images/backup/backup-job-details.png)
 
-File name format: 2019_08_22_18_10_10.0.64.96_8ee03884-1de5-4433-885c-ae9095589b5b.tar.gz
+The information you can find in the job details section are as follows:
+
+* Destination Name: name of your endpoint for the plan, which was executed
+* Destination Type: S3/Swift
+* Container/Bucket: configured container or bucket 
+* Database: the databases configured
+* Start Time: start time of the backup job
+* End Time: end time of the backup job
+* Execution Time: backup execution time
+* Status: 
+    * STARTED: job was started a few seconds ago and is not yet executed through the backup agent
+    * RUNNING: job is being executed in the agent or uploading resource to your endpoint
+    * SUCCEEDED: job execution was successful
+    * ERROR: job execution failed, please check in the job detail view the reason
+* Error Message: the message, when the executed failed
+* Pre-Backup Log: execution log for the pre backup script
+* Pre-Backup Error Log: error execution log for the pre backup script
+* Pre-Backup Lock Log: execution log for the backup lock script
+* Pre-Backup Lock Error Log: error execution log for the backup lock script
+* Backup Log: execution log for the pre backup script
+* Backup Error Log: error execution log for the backup script
+* Post-Backup Cleanup Log: execution log for the post backup script
+* Post-Backup Cleanup Error Log: error execution log for the post backup script
+* Post-Backup Unlock Log: execution log for the backup unlock script
+* Post-restore Unlock Error Log: error execution log for the backup lock script
+* Files: the files transferred to the endpoint, one per database configured (file name format: 2019_08_22_18_10_10.0.64.96_8ee03884-1de5-4433-885c-ae9095589b5b.tar.gz)
+
+### Restore Points
+If a backup was successful, you can find the restore points in the overview under Restore Points. To restore from a specific restore point just click on the restore 
+button, which will bring you to the backup selection.
+![Backup Plans](images/backup/restore-point-list.png)
+
+In this section you can find the the following properties:
+
+* Destination Name: name of your endpoint for the plan, which was executed
+* Destination Type: S3/Swift
+* Container/Bucket: configured container or bucket
+* Files: the files transferred to the endpoint, one per database configured (file name format: 2019_08_22_18_10_10.0.64.96_8ee03884-1de5-4433-885c-ae9095589b5b.tar.gz)
+
+![Backup Plans](images/backup/restore-point-request.png)
+
+By clicking on the `restore` button you can trigger a restore operation, which will then trigger a restore in the database the backup was
+made of.
+
+### Restore Jobs
+From the restore point section and the `Restore` button the restore jobs are run. The state of those runs can be 
+checked in the restore jobs section. The most important information here are the start date of the job and the state. 
+![Restore Job List](images/backup/restore-job-list.png)
+
+A restore job may have four different states:
+
+* STARTED: job was started a few seconds ago and is not yet executed through the restore agent
+* RUNNING: job is being executed in the agent or uploading resource to your endpoint
+* SUCCEEDED: job execution was successful
+* ERROR: job execution failed, please check in the job detail view the reason
+
+By clicking on the details button you can see the job details. The job details view contains valuable information about the success of your backup job. Currently
+the following properties are returned:
+
+![Restore Job Details](images/backup/restore-job-details.png)
+
+The information you can find in the job details section are as follows:
+
+* Database: the databases configured
+* Start Time: start time of the restore job
+* End Time: end time of the restore job
+* Execution Time: restore execution time
+* Status: 
+    * STARTED: job was started a few seconds ago and is not yet executed through the restore agent
+    * RUNNING: job is being executed in the agent or uploading resource to your endpoint
+    * SUCCEEDED: job execution was successful
+    * ERROR: job execution failed, please check in the job detail view the reason
+* Error Message: the message, when the executed failed
+* Pre-Restore Log: execution log for the pre restore script
+* Pre-Restore Error Log: error execution log for the pre restore script
+* Pre-Restore Lock Log: execution log for the restore lock script
+* Pre-Restore Lock Error Log: error execution log for the restore lock script
+* Restore Log: execution log for the pre restore script
+* Restore Error Log: error execution log for the restore script
+* Post-Restore Cleanup Log: execution log for the post restore script
+* Post-Restore Cleanup Error Log: error execution log for the post restore script
+* Post-Restore Unlock Log: execution log for the restore unlock script
+* Post-restore Unlock Error Log: error execution log for the restore lock script
