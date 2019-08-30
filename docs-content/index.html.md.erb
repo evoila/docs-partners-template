@@ -19,7 +19,7 @@ setup of Cassandra.
 
 ## <a id='overview'></a>Overview
 
-evoila Services Brokers support different ways of deployment for Service Instances: 
+The evoila Services Brokers support different ways of deployment for Service Instances: 
 
 * Shared Clusters
 * Dedicated VMs and Clusters
@@ -74,7 +74,7 @@ A new Service Instance can be ordered via CF/PKS Command Line Interface. All dep
 </table>
 
 ## <a id='features'></a>Key Features
-evoila Cassanda Service Broker includes the following key features:
+The evoila Cassanda Service Broker includes the following key features:
 
 <table class="nice">
     <th>Feature</th>
@@ -109,10 +109,15 @@ evoila Cassanda Service Broker includes the following key features:
        <td>Credential Store</td>
        <td>
             All evoila Service Brokers support an abstraction layer for Credential handling:
-
-            * Default: internal credential handler storing encrypted credentials in the Credential column of the Service Broker Backend database.
-            * Crehdub: external Credhub credential handler storing all credentials, certificates etc. in a Credhub instance of your choice (configurable).
-       </td>
+            <ul>
+                <li>
+                    Default: internal credential handler storing encrypted credentials in the Credential column of the Service Broker Backend database.
+                </li>
+                <li>
+                    Credhub: external Credhub credential handler storing all credentials, certificates etc. in a Credhub instance of your choice (configurable).
+                </li>
+            </ul>
+                   </td>
     </tr>  
     <tr>
        <td>SSL/TLS</td>

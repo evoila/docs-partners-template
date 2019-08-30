@@ -6,7 +6,7 @@ owner: evoila GmbH
 <strong><%= modified_date %></strong>
 
 # Using a Service in an App
-For the services which provide credentials to a service backend, you need to rely on the contents of VCAP_SERVICES. A VCAP_SERVICES section might look as follows:
+For the services which provide credentials to a service backend, you need to rely on the contents of VCAP\_SERVICES. A VCAP\_SERVICES section might look as follows:
 
 ```
 {
@@ -61,4 +61,4 @@ As you can see from above the basic structure is the same for all service instan
 contains all relevant information like `name`, `username`, `password`, `host` etc. 
 
 ## Recommendation
-When you try to retrieve you service in the VCAP_SERVICES section implement the retrieval based on the key of the corresponding service, e.g. `osb-rabbitmq` and the filter by `instance_name` and or `tags`. 
+When you try to retrieve your service in the VCAP\_SERVICES section implement the retrieval based on the key of the corresponding service, e.g. `osb-rabbitmq` and the filter by `instance_name` and or `tags`. 
