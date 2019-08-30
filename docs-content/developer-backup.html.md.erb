@@ -5,27 +5,27 @@ owner: evoila GmbH
 
 <strong><%= modified_date %></strong>
 
-In contrast to many backup solutions on for Open Service Brokers our solution is completely based on an self-service approach. Operators and developers are enabled 
+In contrast to many backup solutions for Open Service Brokers, our solution is completely based on an self-service approach. Operators and developers are enabled 
 to configure and maintain the backup endpoints, plans and restore operations from a dashboard. The following sections will guide you through the process of 
 setting up backup management for Open Service Brokers with data services (e.g. PostgreSQL, MySQL etc.).
-### Backup Endpoint Configuration
+## <a id="backup-endpoint-configuration"></a> Backup Endpoint Configuration
 Before you can create backup plans it is necessary to configure a backup endpoint. Currently we support two diffent endpoint technologies:
 
 * S3
 * Swift
 
-#### S3
+### <a id="s3"></a> S3
 For S3 you need to configure the following parameters in AWS before you can add it to your backup endpoint:
 
 * AWS Secret: create AWS secret from your AWS management console
 * AWS Secret Key: use the AWS secret key from the AWS secret 
-* Bucket: create a bucket in AWS S3 and remember the name
+* Bucket: create a bucket in AWS S3
 
 ![Backup Endpoint Configuration](images/backup/backup-endpoint-configuration.png)
 
 Additionally you need to specify the following values for an endpoint:
 
-* Name: the endpoint name 
+* Name: specify the endpoint name 
 * Destination Type: choose between S3 and Swift
 * Bucket/Container: depending on S3 or Swift
 
@@ -37,7 +37,7 @@ After you have successfully configured an endpoint, you will be redirected to th
 
 ![Backup Endpoint List](images/backup/backup-endpoint-list.png)
 
-### Backup Plan Configuration
+## <a id="backup-plan-configuration"></a> Backup Plan Configuration
 After you have successfully configured the backup endpoint the next step is to configure the backup plan. A backup plan defines the backup schedule for one or more
 databases. 
 
@@ -65,7 +65,7 @@ After you have successfully configured an plan, you will be redirected to the pl
 
 ![Backup Plan List](images/backup/backup-plan-list.png)
 
-### Backup Jobs
+## <a id="backup-jobs"></a> Backup Jobs
 From the backup plan section and the `Backup now` button or based on the periodic scheduling you defined backup jobs are run. The state of those runs can be 
 checked in the backup jobs section. The most important information here are the start date of the job and the state. 
 
@@ -110,7 +110,7 @@ The information you can find in the job details section are as follows:
 * Post-restore Unlock Error Log: error execution log for the backup lock script
 * Files: the files transferred to the endpoint, one per database configured (file name format: 2019_08_22_18_10_10.0.64.96_8ee03884-1de5-4433-885c-ae9095589b5b.tar.gz)
 
-### Restore Points
+## <a id="restore-points"></a> Restore Points
 If a backup was successful, you can find the restore points in the overview under Restore Points. To restore from a specific restore point just click on the restore 
 button, which will bring you to the backup selection.
 ![Restore Endpoint List](images/backup/restore-point-list.png)
@@ -127,7 +127,7 @@ In this section you can find the the following properties:
 By clicking on the `restore` button you can trigger a restore operation, which will then trigger a restore in the database the backup was
 made of.
 
-### Restore Jobs
+## <a id="restore-jobs"></a> Restore Jobs
 From the restore point section and the `Restore` button the restore jobs are run. The state of those runs can be 
 checked in the restore jobs section. The most important information here are the start date of the job and the state. 
 ![Restore Job List](images/backup/restore-job-list.png)

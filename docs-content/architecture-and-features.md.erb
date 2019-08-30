@@ -1,0 +1,74 @@
+---
+title: Cassandra Service Broker (Beta)
+owner: evoila GmbH
+---
+
+## <a id='overview'></a>Overview
+
+evoila Services Brokers support different ways of deployment for Service Instances: 
+
+* Shared Clusters
+* Dedicated VMs and Clusters
+
+### Shared Clusters
+Shared Clusters host Service Instances of several users with a multitenancy separation. E.g. a large PostgreSQL Cluster, which allows 
+customers/developers to provision a database instance. Instances on shared clusters are particularly inexpensive, but have limitations 
+in their performance and parameterization possibilities. The services should be hardened so that users can never access external data. 
+Shared Cluster and Service Instances on it should NEVER BE USED FOR PRODUCTION. Most databases do not provide out-of-the-box features 
+for noisy neighbours, connection and resource limitation on a granular level.
+
+As you can't scale clusters indefinitely or you want to provide different service classes of your existing clusters (Silver, Gold, 
+Platinum based on Storage Performance), the OSB Framework provides the ability to configure an individual number of so called existing endpoints.
+
+### Dedicated VMs and Clusters
+Dedicated VMs/Containers and Clusters are Service Instances that are provisioned as needed. Usually the customer is granted more rights on 
+these Service Instances, e.g. to create more databases or users. In addition, more parameters of the service can be set to adapt performance 
+to the specific use case.
+
+
+## <a id='features'></a>Key Features
+<table class="nice">
+    <th>Feature</th>
+    <th>Description</th>
+     <tr>
+        <td>Shared Clusters</td>
+        <td>
+            For the light Plans customer can allow Developers to deploy Service Instances on a Shared MongoDB Replica Set Cluster.
+            This enables Developers to rapidly test their applications against a backend service. Shared Cluster deployments and
+            their Service Instances are NOT recommend for production usage.
+        </td>
+    </tr>
+    <tr>
+        <td>Dedicated Vms and Clusters</td>
+        <td>
+            The dynamic Service Plans allows customers to configured Plans according to their specification. With this the customer is
+            able to spread its Service Offering from Single VM Cassandra Service Instances to (non-limited) multi-node deployments for
+            large scale Service Instances with heavy load.
+        </td>
+    </tr>
+    <tr>
+       <td>Configurability</td>
+       <td>
+            The Service Broker has multiple configuration options, which can be seens in detail in the section Configuration Options.
+       </td>
+    </tr> 
+    <tr>
+       <td>Credential Store</td>
+       <td>
+            All evoila Service Brokers support an abstraction layer for Credential handling:
+
+            * Default: internal credential handler storing encrypted credentials in the Credential column of the Service Broker Backend database.
+            * Crehdub: external Credhub credential handler storing all credentials, certificates etc. in a Credhub instance of your choice (configurable).
+       </td>
+    </tr>   
+    <tr>
+        <td>Backup Support</td>
+        <td>
+            With the fully integrated Service Broker Backup Management the customer is able to provide a self-service Backup Management Solution to
+            the Developers or DevOps. It allows to store Backups on external S3/Swift stores, to compress and encrypt backups and to do
+            restores on demand.
+        </td>
+    </tr>
+</table>
+
+TODO: Link von Service Broker Backup Management -> Backup Management

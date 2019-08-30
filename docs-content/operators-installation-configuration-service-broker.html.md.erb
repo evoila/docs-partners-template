@@ -5,6 +5,8 @@ owner: evoila GmbH
 
 <strong><%= modified_date %></strong>
 
+TODO: Add screenshots of newly imported Service Broker Backend Tile and unconfigured Tile
+
 ## <a id='install-service-broker'></a> Install Cassandra Service Broker
 
 To install the evoila Cassandra Service Broker file on the Ops Manager Installation Dashboard, do the following:
@@ -20,29 +22,38 @@ This adds the tile to your staging area.
 
 ## <a id='configure-service-broker'></a> Configure Cassandra Service Broker
 
-1. After you have successfully added the evoila Service Broker the next step is the confiugration of it.
+1. After you have successfully added the evoila Service Broker the next step is its configuration.
+
+TODO: Change Logo 
 
 1. To configure the Service Broker please click on the evoila Service Broker Tile ![Service Broker Backend Tile](images/logo.png)
 
-1. In the first step, please configure the Availability Zones and Network Assignments ![Availability Zones](images/tile/availability-zones-and-network-assignments.png)
+###  Assign AZs and Networks
 
-1. In the second step, please configure the plan name and description in the Catalog ![Catalog Name](images/tile/service-broker/catalog-name.png)
+1. In the next step, please configure the Availability Zones and Network Assignments ![Availability Zones](images/tile/availability-zones-and-network-assignments.png)
+
+1. After doing the changes please click **Save**.
+
+### Catalog Name 
+
+1. In the next step, please configure the plan name and description in the Catalog ![Catalog Name](images/tile/service-broker/catalog-name.png)
     1. **Name:** Name of the Plan in the Catalog
     1. **Description:** Description of the Plan in the Catalog
     1. **Service Bindable?:** Defines, if the Service is bindable with an App
-    1. **Service Updatable?:** Enables, if the Service might be changed from e.g. S to M (currently we don't support this for all Service Brokers, please contact support in case of questions)
 
 1. After doing the changes please click **Save**.
 
-1. After doing the changes please click **Save**.
+### Existing
 
-1. In the third step (only if existing endpoints are configurable), please configure the endpoint of the Deployment. Every deployment comes with a predefined value, which should
+1. In the next step (only if existing endpoints are configurable), please configure the endpoint of the Deployment. Every deployment comes with a predefined value, which should
 only be changed if there is a valid reason. In case the Deployment of the existing endpoint is done via this Tile, then leave the value as it is.
 ![Existing Endpoint](images/tile/service-broker/existing-endpoint.png)
 
 1. After doing the changes please click **Save**.
 
-1. In the fourth step, please configure a Plan. If the Tile contains an **Existing Endpoint** menu item in the tile configuration the first Plan is always dedicated to be
+### Catalog Plans
+
+1. In the next step, please configure a Plan. If the Tile contains an **Existing Endpoint** menu item in the tile configuration the first Plan is always dedicated to be
 a Plan for an existing endpoint.
     1. **Existing Endpoint Plan Configuration** ![Existing Endpoint](images/tile/service-broker/plan-definition-shared.png)
         1. **Name:** Name of the Plan in the Catalog
@@ -68,9 +79,13 @@ a Plan for an existing endpoint.
 
 1. After doing the changes please click **Save**.
 
-1. In the pre-last step, you can leave all settings as configured before regarding the execution of errands: ![Errands](images/tile/errands.png)
+### Errands
+
+1. In the pre-last step, you can leave all settings as configured as default: ![Errands](images/tile/errands.png)
 
 1. After doing the changes please click **Save**.
+
+### Resource Config
 
 1. In the last step, please configure the Number of Instances, Persistent Disk Types and VM Type for the existing service. This differs from Service Broker to Service Broker.
 ![Resource Config](images/tile/resource-config.png) As an example we have PostgreSQL here:

@@ -11,6 +11,9 @@ This topic describes how to install and configure evoila Cassandra Service Broke
 
 To install the evoila Service Broker file on the Ops Manager Installation Dashboard, do the following:
 
+
+TODO: Add screenshots of newly imported Service Broker Backend Tile and unconfigured Tile
+
 1. Download the product file from Pivotal Network.
 
 1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product** to upload the product file. 
@@ -20,25 +23,30 @@ This adds the tile to your staging area.
 
 ## <a id="configure-service-broker-backend"></a> Configure Service Broker Backend
 
-1. After you have successfully added the evoila Service Broker Backend the next step is the confiugration of it.
+1. After you have successfully added the evoila Service Broker Backend the next is its configuration.
 
 1. To configure the Service Broker Backend please click on the evoila Service Broker Backend Tile ![Service Broker Backend Tile](images/tile/service-broker-backend-tile.png)
 
-1. In the first step, please configure the Availability Zones and Network Assignments ![Availability Zones](images/tile/availability-zones-and-network-assignments.png)
+
+### Assign AZs and Networks
+1. In the next step, please configure the Availability Zones and Network Assignments ![Availability Zones](images/tile/availability-zones-and-network-assignments.png)
 
 1. After doing the changes please click **Save**.
 
-1. In the second step, please configure the Bosh and Credhub Credentials: ![Availability Zones](images/tile/bosh-config.png)
+### Bosh Config
+1. In the next step, please configure the Bosh and Credhub Credentials: ![Availability Zones](images/tile/bosh-config.png)
     1. **For Bosh Opsman Credentials**, please enter a Username and Password, which has the ability to CREATE, UPDATE and DELETE deployments.
     1. **For Credhub Credentials**, please enter a Username and Password, which has the ability to CREATE, UPDATE and DELETE User/Password, Password and Certificates.
 
 1. After doing the changes please click **Save**.
 
-1. In the third step, you can leave all settings as configured before regarding the execution of errands: ![Errands](images/tile/errands.png)
+### Errands
+1. In the next step, you can leave all settings as configured by default: ![Errands](images/tile/errands.png)
 
 1. After doing the changes please click **Save**.
 
-1. In the fourth step, please configure the Number of Instances, Persistent Disk Types and VM Type for the backend services: ![Resource Config](images/tile/resource-config.png)
+### Resource Config
+1. In the next step, please configure the Number of Instances, Persistent Disk Types and VM Type for the backend services: ![Resource Config](images/tile/resource-config.png)
     1. **RabbitMQ Server**: In our Service Broker Backend we have central RabbitMQ Server, which is use to queue Jobs like Service Key Creation, Backup Schedules etc.
     1. **MongoDB**: MongoDB is the central store for all information around Service Instances, Service Bindings and also Credential Management if no Credhub is available.
 

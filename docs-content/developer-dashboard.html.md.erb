@@ -10,9 +10,8 @@ This topic describes how to use the Service Dashboard
 ## <a id="access-dashboard"></a> Access Dashboard
 To access the Dashboard two different options do exist:
 
-* Apps Manager
 * CLI
-
+* Apps Manager
 
 ### CLI
 Accessing the Dasboard via CLI is relatively easy. Before you can access the URL to open the Service Dashboard, you need to login via CF CLI. After you have selected the Organisation 
@@ -24,9 +23,9 @@ This should produce an output as following:
 cf services
 Getting services in org demo / space demo-test as admin...
 
-name               service               plan   bound apps   last operation
-osb-mysql-test-s   osb-mysql-test        s                   create succeeded
-postgres-test      osb-postgresql-test   s                   create succeeded
+name                                service               plan   bound apps   last operation
+YOUR_SERVICE_INSTANCE_MYSQL         osb-mysql-test        s                   create succeeded
+YOUR_SERVICE_INSTANCE_POSTGRESQL    osb-postgresql-test   s                   create succeeded
 ````
 
 After you have selected the Service you want to access via Dashboard, you need to issue `cf service SERVICE_NAME`.
@@ -79,29 +78,36 @@ To access the Dashboard, please enter your Login Credentials.
 ## <a id="dashboard-sections"></a> Dashboard Sections
 The Dashboard consists of multiple sections, which will be discussed in the following paragraphs.
 
-### <a id="support-and-docs"></a> Welcome Dashboard
-The Dashboard Overview is the general starting point, when using the Service Broker options. Based on the options a Service Broker offers
+* Welcome Page
+* Configuration
+* Backup Management
+* Service Keys
+
+### <a id="support-and-docs"></a> Welcome Page
+The Dashboard Overview is the landing page, when using the Service Broker options. Based on the options a Service Broker offers
 you can find there a general description, the links to the documentation, backup management and service keys.
 
 ![Backup Plans](images/dashboard/dashboard-overview.png)
 
 ### <a id="support-and-docs"></a> Configuration
-The configuration section allows you, if the feature is enabled for the Service Broker, to configure databases on a pre-selected amount of 
+If the feature is enabled for the Service Broker the configuration section allows you to configure your service on a pre-selected amount of 
 configuration elements. If you don't find a configuration option you would expect, please contact us.
 
 ![Service Configuration](images/dashboard/dashboard-configuration.png)
 
-When you do a configuration change, in the upper right corner you can see a spinning circle. By clicking on it, you can also see the current
+When you change the configuration in the upper right corner you can see a spinning circle. By clicking on it, you can also see the current
 action being executed.
 
 ### <a id="support-and-docs"></a> Backup Management
-The backup management section allows you, if the feature is enabled for the Service Broker, to configure and schedule the backup management
+If the feature is enabled for the Service Broker, the backup management section allows you to configure and schedule the backup management
 for your endpoint service.
+
+TODO: Link zum Backup Management
 
 ![Backup Dashboard](images/dashboard/dashboard-backup.png)
 
 ### <a id="service-keys"></a> Service Keys
-The service key section allows you, if the feature is enabled for the Service Broker, to configure credentials, which are not bound to a
+If the feature is enabled for the Service Broker the service key section allows you to configure credentials, which are not bound to a
 specific app. 
 
 ![Service Keys](images/dashboard/dashboard-service-keys.png)

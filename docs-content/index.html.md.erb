@@ -17,28 +17,6 @@ This documentation describes the evoila Cassandra Service Broker for Pivotal Clo
 (PKS). The evoila Cassanda Service Broker for PCF/PKS enables developers to run Big Data Applications with a highly scalable
 setup of Cassandra. 
 
-## <a id='overview'></a>Overview
-
-evoila Services Brokers support different ways of deployment for Service Instances: 
-
-* Shared Clusters
-* Dedicated VMs and Clusters
-
-### Shared Clusters
-Shared Clusters host Service Instances of several users with a multitenancy separation. E.g. a large PostgreSQL Cluster, which allows 
-customers/developers to provision a database instance. Instances on shared clusters are particularly inexpensive, but have limitations 
-in their performance and parameterization possibilities. The services should be hardened so that users can never access external data. 
-Shared Cluster and Service Instances on it should NEVER BE USED FOR PRODUCTION. Most databases do not provide out-of-the-box features 
-for noisy neighbours, connection and resource limitation on a granular level.
-
-As you can't scale clusters indefinitely or you want to provide different service classes of your existing clusters (Silver, Gold, 
-Platinum based on Storage Performance), the OSB Framework provides the ability to configure an unlimited number of so called existing endpoints.
-
-### Dedicated VMs and Clusters
-Dedicated VMs/Containers and Clusters are Service Instances that are provisioned as needed. Usually the customer is granted more rights on 
-these Service Instances, e.g. to create more databases or users. In addition, more parameters of the service can be set to adapt performance 
-to his use case.
-
 ### Cassandra Service Broker
 The evoila Cassandra Service Broker for PCF/PKS is able to supports the following ways of Deployment Cassandra:.
 
@@ -55,8 +33,10 @@ The evoila Cassandra Service Broker for PCF/PKS is able to supports the followin
     </tr>
 </table>
 
-The Service Broker supports an unlimited number of Shared and Dedicated Plans. The Plans are predefined with Metadata and Schema
+The Service Broker supports a high number of Shared and Dedicated Plans. The Plans are predefined with Metadata and Schema
 Definitions, which support the configuration of a Service Instance in the Service Broker Dashboard.
+
+TODO: More details about the dashboard configuration
 
 A new Service Instance can be ordered via CF/PKS Command Line Interface. All deployed Service Instances of Cassandra are:
 
@@ -82,36 +62,25 @@ evoila Cassanda Service Broker includes the following key features:
      <tr>
         <td>Shared Clusters</td>
         <td>
-            For the light Plans customer can allow Developers to deploy Service Instances on a Shared MongoDB Replica Set Cluster.
-            This enables Developers to rapidly test their applications against a backend service. Shared Cluster deployments and
-            their Service Instances are NOT recommend for production usage.
+            Enabled
         </td>
     </tr>
     <tr>
         <td>Dedicated Vms and Clusters</td>
         <td>
-            The dynamic Service Plans allows customers to configured Plans according to their specification. With this the customer is
-            able to spread its Service Offering from Single VM Cassandra Service Instances to (non-limited) multi-node deployments for
-            large scale Service Instances with heavy load.
+            Enabled
         </td>
     </tr>
     <tr>
        <td>Configurability</td>
        <td>
-            Currently the evoila Cassanda Service Broker supports configuration of the following parameters (post-deployment):
-
-            * owner
-            * two
-            * three
+            Enabled
        </td>
     </tr> 
     <tr>
        <td>Credential Store</td>
        <td>
-            All evoila Service Brokers support an abstraction layer for Credential handling:
-
-            * Default: internal credential handler storing encrypted credentials in the Credential column of the Service Broker Backend database.
-            * Crehdub: external Credhub credential handler storing all credentials, certificates etc. in a Credhub instance of your choice (configurable).
+           Enabled
        </td>
     </tr>  
     <tr>
@@ -123,14 +92,8 @@ evoila Cassanda Service Broker includes the following key features:
     <tr>
         <td>Backup Support</td>
         <td>
-            With the fully integrated Service Broker Backup Solution the customer is able to provide a self-service Backup Solution to
-            the Developers or DevOps. It allows to store Backups on external S3/Swift stores, to compress and encrypt backups and to do
-            restores on demand.
+            Disbaled
         </td>
-    </tr>
-    <tr>
-        <td>Supported Stemcells</td>
-        <td>Trusty, Xenial</td>
     </tr>
     <tr>
         <td>Bosh DNS</td>
@@ -138,7 +101,19 @@ evoila Cassanda Service Broker includes the following key features:
     </tr>
 </table>
 
+### Configuration Options
 
+<table class="nice">
+    <th>Config Parameter</th>
+    <th>Description</th>
+     <tr>
+        <td>example.one</td>
+        <td>
+            Text to be done
+        </td>
+    </tr>
+
+</table>
 
 ## <a id="snapshot"></a>Product Snapshot
 
@@ -181,14 +156,18 @@ The following table provides version and version-support information about PRODU
 ## <a id="reqs"></a>Requirements
 To install, configure and use evoila Cassandra Service Broker, you must install the following products:
 
+* evoila Service Broker Backend
+
+An one of the following:
+
 * Pivotal Applications Services
 * Pivotal Container Services
-* evoila Service Broker Backend
+
 
 ## <a id="feedback"></a>Feedback
 
-If you have a feature request, questions, or information about a bug, please email
-[evoila Service Broker Support](mailto:support@evoila.de) list or send an email to support@evoila.de.
+If you have a feature request, questions, or information about a bug, please email us via
+[evoila Service Broker Support](mailto:support@evoila.de).
 
 ## <a id='license'></a>License
 
