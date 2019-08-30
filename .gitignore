@@ -1,3 +1,4 @@
 docs-book/final_app/*
 docs-book/output/*
 *.log
+build-and-exec.sh

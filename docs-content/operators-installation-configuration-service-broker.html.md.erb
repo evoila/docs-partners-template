@@ -66,8 +66,8 @@ a Plan for an existing endpoint.
         1. **Description:** Description of the Plan in the Catalog
         1. **Plan for Free?:** Enables if the Plan is for free
         1. **Backups Enabled:** Enables if the Plans Service Instance can be backuped by the evoila Backup Manager
-        1. **Connections:** Defines the maximum number of Connections for an Service Instance
-        1. **Ingress Node:** Defines the node, which accepts the incoming connections. For Service Broker (e.g. MySQL), which are load balanced by HaProxy the plans differ in that sence,
+        1. **Connections:** Defines the maximum number of Connections for a Service Instance
+        1. **Ingress Node:** Defines the node, which accepts the incoming connections. For Service Broker (e.g. MySQL), which are load balanced by HaProxy the plans differ in that sense,
         that smaller Plans, which only contain one MySQL Node do have MySQL as the node for the incoming connections, while large Plans with a MySQL Galera Cluster do have a HaProxy as 
         the load balancing node for incoming connections.
         1. **Nodes:** The number of nodes for the Service Instance (please keep in mind of Qurom Rules etc. NOTE: as misconfiguration might lead to a potential data loss)

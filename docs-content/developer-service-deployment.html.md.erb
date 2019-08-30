@@ -25,7 +25,7 @@ service             plans           description
 osb-SERVICE_NAME    s, m, l, xl     OSB Services for SERVICE NAME
 ```
 
-## Creating a Service Instances
+## Creating a Service Instance
 You can create a service instance with the following command: `cf create-service osb-SERVICE_NAME PLAN SERVICE_INSTANCE`
 
 * osb-SERVICE_NAME: representing the service name of the service you want to deploy. E.g. osb-redis, osb-mysql.
@@ -39,7 +39,7 @@ Creating service my_service in org evoila / space test as operator@domain.com...
 OK
 ```
 
-INFO: Sometime it can happen, that different brokers provide services with the same name. In that case, you need to specify the broker in you provisioning command with `-b BROKER_NAME`. 
+INFO: Sometimes it can happen, that different brokers provide services with the same name. In that case, you need to specify the broker in you provisioning command with `-b BROKER_NAME`. 
 
 ### Arbitrary Parameters
 INFO: Arbitrary parameters require cf CLI v6.12.1+
@@ -72,7 +72,7 @@ OK
 ## Instance Tags
 Instance tags require cf CLI v6.12.1+
 
-Some of our service provide the availability to specify tag, which Cloud Foundry includes in the VCAP_SERVICES environment variables. The benifit of those tags is mostly for developers, who can access them by parsing the credentials in a different way. Developers may provide their own tags when creating a service instance by including the -t flag followed by a comma-separated list of tags.
+Some of our services provide the availability to specify tags, which Cloud Foundry includes in the VCAP_SERVICES environment variables. The benifit of those tags is mostly for developers, who can access them by parsing the credentials in a different way. Developers may provide their own tags when creating a service instance by including the -t flag followed by a comma-separated list of tags.
 
 **Example providing a comma-separated list of tags:**
 
@@ -169,7 +169,7 @@ For more information about app manifests, see Deploying with App Manifests.
 ### Arbitrary Parameters
 INFO: Arbitrary parameters require cf CLI v6.12.1+
 
-Nearly all of our service broker provide additional configuration parameters with the provision request. The format to pass these parameters into the Service are based on a JSON object. Currently there are two options provide the parameters during the service creation:
+Nearly all of our service brokers provide additional configuration parameters with the provision request. The format to pass these parameters into the Service are based on a JSON object. Currently there are two options provide the parameters during the service creation:
 
 * In line 
 * Referencing a file
@@ -195,7 +195,7 @@ Unbinding app demo-app from service mysql in org evoila / space test as operator
 OK
 ````
 
-INFO: To take effect of the unbdind operation it is necessary to restage the application. 
+INFO: To take effect of the unbind operation, it is necessary to restage the application. 
 
 ### Rename a Service Instance
 You can change the name given to a service instance. Keep in mind that upon restarting any bound apps, the name of the instance will change in the VCAP_SERVICES environment variable. If your app depends on the instance name for discovering credentials, changing the name could break your app’s use of the service instance.
